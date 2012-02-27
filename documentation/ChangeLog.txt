@@ -1,0 +1,50 @@
+v 0.01
+-Player exists and can move in 4 directions
+-Player can jump, gravity
+-Player can dig
+-World is generated
+-Camera pans with player to world edge
+-Player collides with world
+
+v 0.02
+-First pass art (blocks and player)
+-Velocity-based jumping, gravity
+-First pass terrain generation
+-Dirt
+-Rock
+-Ore
+-Renamed files to something appropriate (caverns)
+-Edited css to center game window
+
+v 0.03
+-Multi-key input
+-Fixed gravity velocity collision glitch
+-Added instructions
+-Modifications for public release
+-Sprite animation system
+-Sprite flipping
+-Gamepad first-pass (doesn't work, chrome implementation bad)
+-Transparent Character Sprite
+
+v 0.04
+-Fixed Spacebar default bug
+-Pausing
+-allowed for variable width and height sprite frames with specific durations
+-sideways digging
+-extracted sprite object methods
+-fixed update position for negative y (jump)
+-added health placeholder
+-added money placeholder
+-added Menu placeholders
+-Pausing
+-attack (animation-only)
+-stubs for inventory and items
+
+v 0.05
+-Added lots new sprite attributes
+-Fixed physics bugs and fleshed out other parts of physics calculation (x axis movement, friction, collision detection)
+-Fixed some animation bugs
+-Cleaned up the html
+-Added spider art and AI (player homing)
+-Added spiney art and AI (wall clinging)
+-Added partial player death logic

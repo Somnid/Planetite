@@ -1,0 +1,9 @@
+-Use Arrow Keys to move left and right
+-use space to jump
+-use down to duck
+-use ctrl to dig beneath you
+-use ctrl + left/right to dig to the left/right
+-use Escape to pause access menu
+-use Shift to attack
+
+You will need to reset upon death
