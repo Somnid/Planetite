@@ -1,1 +1,94 @@
-Caverns main page
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Caverns</title>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+		<script type="text/javascript" src="BrowserTweaks.js"></script>
+		<script type="text/javascript" src="Helper.js"></script>
+		<script type="text/javascript" src="Keyboard.js"></script>
+		<script type="text/javascript" src="Compatibility.js"></script>
+		<script type="text/javascript" src="Globals.js"></script>
+		<script type="text/javascript" src="Item.js"></script>
+		<script type="text/javascript" src="Object.js"></script>
+		<script type="text/javascript" src="Animation.js"></script>
+		<script type="text/javascript" src="AI.js"></script>
+		<script type="text/javascript" src="Menu.js"></script>
+		<script type="text/javascript" src="World.js"></script>
+		<script type="text/javascript" src="Caverns.js"></script>
+		<link rel="stylesheet" type="text/css" href="caverns.css">
+	</head>
+	<body>
+		<div class="main">
+			<canvas id="cvsScreen" width="640" height="480">
+				Browser does not support this element.
+			</canvas>
+			<br />
+			<div>
+				<table>
+					<tr>
+						<td>
+							<input type="button" value="Save" id="btnSave" />
+						</td>
+						<td>
+							<input type="button" value="Load" id="btnLoad" />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<span>FPS:</span>
+						</td>
+						<td>
+							<span id="fps"></span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<span>Last Key:</span>
+						</td>
+						<td>
+							<span id="lastkey"></span>
+						</td>
+					</tr>
+					<!--<tr>
+						<td>
+							<span>Frameset:</span>
+						</td>
+						<td>
+							<span id="frameset"></span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Camera Position:
+						</td>
+						<td id="camera-position">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Player Position:
+						</td>
+						<td id="player-position">
+						</td>
+					</tr>-->
+					<tr>
+						<td>
+							Version:
+						</td>
+						<td>
+							<span id="version"><span> (<a href="documentation/changelog.txt">Changelog</a>)
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2"><a href="documentation/instructions.txt">Instructions</a>&nbsp;|&nbsp;<a href="documentation/credits.txt">Credits</a></td>
+					</tr>
+				</table>
+			</div>
+			<br />
+			<div>
+				<ul id="requirements">
+				</ul>
+			</div>
+		</div>
+	</body>
+</html>
