@@ -1,0 +1,1 @@
+{  "name": "Caverns",  "version": "0.0.6",  "description": "A resouce gathering exploration game by Somind.",  "app": {    "launch": {      "local_path": "index.html"    }  },  "permissions" : [	"https://api.dropbox.com"  ]}
