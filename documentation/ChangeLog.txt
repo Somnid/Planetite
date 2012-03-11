@@ -53,3 +53,4 @@ v 0.06
 -Moved to GitHub
 -Refactor of world objects and methods
 -Saving and Loading files to localStorage
+-Added Google Analytics
