@@ -6,4 +6,7 @@
 -use Escape to pause access menu
 -use Shift to attack
 
+-use the save button to save current world state
+-use the load button to load saved world state
+
 You will need to reset upon death

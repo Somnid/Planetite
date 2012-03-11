@@ -1,5 +1,5 @@
 var World = (function(){
-	var WORLD_VERSION = 0.06;
+	var WORLD_VERSION = 0.001;
 	
 	function NullTile(){
 		return new Tile("null", 0, false, 0);
@@ -15,23 +15,21 @@ var World = (function(){
 		this.isSolid = isSolid;
 		this.maxHp = hp;
 		this.hp = hp;
-		
-		var frameTransitionHp = transitionHps || [];
-		
-		this.attack = function(damage){
-			this.hp -= damage;
-			
-			if(this.frame < frameTransitionHp.length && this.maxHp - this.hp == frameTransitionHp[this.frame]){
-				this.frame++;
-			}
-			
-			if(this.hp <= 0){
-				this.type = "null";
-				this.isSolid = false;
-			}
-		};
+		this.frameTransitionHp = transitionHps || [];
 		
 		return this;
+	};
+	Tile.prototype.attack = function(damage){
+		this.hp -= damage;
+		
+		if(this.frame < this.frameTransitionHp.length && this.maxHp - this.hp == this.frameTransitionHp[this.frame]){
+			this.frame++;
+		}
+		
+		if(this.hp <= 0){
+			this.type = "null";
+			this.isSolid = false;
+		}
 	};
 	
 	var MapProto = function(){
@@ -87,7 +85,6 @@ var World = (function(){
 	
 	var Map = function(width, height, size){
 		this.tiles = {};
-		this.grid = null;
 		this.gridWidth = width;
 		this.gridHeight = height;
 		this.gridSize = size;
@@ -126,10 +123,42 @@ var World = (function(){
 		return map;
 	};
 	
+	function loadMap(save){
+		if(save.version > WORLD_VERSION){
+			alert("Operation Unsupported: Save version is greater than current version.");
+		}
+	
+		var map = new Map();
+		
+		map.gridWidth = save.gridWidth;
+		map.gridHeight = save.gridHeight;
+		map.gridSize = save.gridSize;
+		map.grid = makeGridFromSavedGrid(save.grid);
+		map.width = map.gridWidth * map.gridSize;
+		map.height = map.gridHeight * map.gridSize;
+		
+		return map;
+	};
+	
+	function makeGridFromSavedGrid(grid){  //allows serialized grid object to reform as an object with functions
+		var newGrid = new Array();
+	
+		for(var i = 0; i < grid.length; i++){
+			newGrid[i] = new Array();
+			for(var j = 0; j < grid[i].length; j++){
+				savedGrid = grid[i][j];
+				newGrid[i][j] = Helper.assignProps(new Tile(), savedGrid);
+			}
+		}
+		
+		return newGrid;
+	}
+	
 	return {
 		NullTile : NullTile,
 		OBTile : OBTile,
 		Tile : Tile,
-		newMap : newMap
+		newMap : newMap,
+		loadMap : loadMap
 	};
 })();

@@ -11,6 +11,7 @@ var Compatibility = (function(){
 	
 	var pub = {
 		requirementCheck : 	function (){
+			$("#requirements").empty();
 			$("#requirements").append('<li>Canvas: ' + hasCanvas + '</li>')
 			$("#requirements").append('<li>RequestAnimationFrame: ' + hasAnimationFrame + '</li>')
 			$("#requirements").append('<li>LocalStorage: ' + hasLocalStorage + '</li>')

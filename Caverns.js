@@ -230,14 +230,14 @@ var Engine = (function(){
 	};
 	
 	var sideDig = function(){
-		for(var i = 0; Player.position.y - Map.gridSize + 1 + (i*Map.gridSize) < Player.getBottom(); i++){
+		for(var i = 0; Player.position.y - Engine.map.gridSize + 1 + (i*Engine.map.gridSize) < Player.getBottom(); i++){
 			var x = Player.isFacingRight 
-				? Player.getRight() + Map.gridSize - 1
-				: Player.position.x - Map.gridSize + 1;
+				? Player.getRight() + Engine.map.gridSize - 1
+				: Player.position.x - Engine.map.gridSize + 1;
 				
-			var y = Player.position.y - Map.gridSize + 1 + (i*Map.gridSize);
+			var y = Player.position.y - Engine.map.gridSize + 1 + (i*Engine.map.gridSize);
 			
-			var tile = Map.getTileAt(x, y); 
+			var tile = Engine.map.getTileAt(x, y); 
 			if(tile.type != "null"){
 				tile.attack(Player.inventory.pickaxe.power);
 				return;
@@ -276,6 +276,29 @@ var Engine = (function(){
 			return false;
 		}
 		
+		worldInit(map);
+		
+		Compatibility.requestAnimationFrame(step, Screen.canvas);
+		
+		$(document).keydown(function(e){
+			$("#lastkey").text(e.keyCode);
+		});
+		$("#btnSave").click(function(){
+			localStorage.setItem("save", Engine.map.save());
+		});
+		$("#btnLoad").click(function(){
+			var saveString = localStorage.getItem("save");
+			var saveObj;
+			
+			if(saveString && saveString != ""){
+				saveObj = JSON.parse(saveString);
+			}
+			
+			worldInit(World.loadMap(saveObj));
+		});
+	}
+	
+	var worldInit = function(map){
 		initScreen();
 		
 		map.loadTile("black", "black.png");
@@ -288,17 +311,7 @@ var Engine = (function(){
 		loadCamera(map);
 		loadEnemies(map);
 		Engine.map = map;
-		Compatibility.requestAnimationFrame(step, Screen.canvas);
-		
-		$(document).keydown(function(e){
-			$("#lastkey").text(e.keyCode);
-		});
-		$("#btnSave").click(function(){
-			console.log(Engine.map.save());
-		});
-		$("#btnLoad").click(function(){
-		});
-	}
+	};
 	
 	var getInput = function(time){
 		if(Keyboard.pressedKeys.esc){
@@ -319,7 +332,7 @@ var Engine = (function(){
 			Player.animation.lastTick = time;
 		}
 		if(Keyboard.pressedKeys.ctrl){
-			Map.getTileAt(Player.position.x + (Player.width / 2), Player.getBottom()+ Map.gridSize - 1, 0).attack(Player.inventory.shovel.power);
+			Engine.map.getTileAt(Player.position.x + (Player.width / 2), Player.getBottom()+ Engine.map.gridSize - 1, 0).attack(Player.inventory.shovel.power);
 			Keyboard.pressedKeys.ctrl = false;
 			Player.animation.frameset("dig");
 			Player.animation.lastTick = time;

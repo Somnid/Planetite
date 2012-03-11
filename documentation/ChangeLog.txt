@@ -48,3 +48,8 @@ v 0.05
 -Added spider art and AI (player homing)
 -Added spiney art and AI (wall clinging)
 -Added partial player death logic
+
+v 0.06
+-Moved to GitHub
+-Refactor of world objects and methods
+-Saving and Loading files to localStorage

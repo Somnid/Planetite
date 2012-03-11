@@ -122,7 +122,7 @@ Object.prototype.updatePosition = function(time, map){
 			if(yToTest <= 0
 			|| map.getTileAt(this.position.x+1, yToTest).isSolid
 			|| map.getTileAt(this.getRight()-1, yToTest).isSolid){
-				this.position.y = (Math.floor(yToTest / map.gridSize) * map.gridSize) + Map.gridSize;
+				this.position.y = (Math.floor(yToTest / map.gridSize) * map.gridSize) + map.gridSize;
 				this.velocity.y = 0;
 				break;
 			}      
