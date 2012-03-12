@@ -1,0 +1,11 @@
+body { text-align: center; margin: 0px; }
+#cvsScreen { border-style: solid; border-width: 1px; border-color: #000000;}
+div.main { display: inline; }
+div.main div {display: inline-block;}
+div.main ul {text-align: left;}
+div.settings { background-color: #FFCC33; height: 100%;position: fixed; }
+div.settings .settings-tabs { width: 50px; height: 100%; background-color: #CCCCCC; float:left; }
+div.settings .settings-main { height: 100%; background-color: #333333; float: left; width: 0px;}
+div.settings .settings-main  .tab-content { height: 100%; color: white; }
+#tab-audio {  background-color:#CC00FF; height: 50px; cursor: pointer; }
+#content-audio audio { display: block; position: absolute; left: 0px;}

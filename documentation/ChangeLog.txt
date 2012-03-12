@@ -54,3 +54,9 @@ v 0.06
 -Refactor of world objects and methods
 -Saving and Loading files to localStorage
 -Added Google Analytics
+
+v 0.07
+-Google App Manifest
+-Settings menu
+-Custom soudtrack
+-WebAudio SFX

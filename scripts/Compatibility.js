@@ -9,7 +9,7 @@ var Compatibility = (function(){
 	//optional
 	var hasGamepads = !!navigator.webkitGamepads || !!navigator.mozGamepads;
 	
-	var pub = {
+	return {
 		requirementCheck : 	function (){
 			$("#requirements").empty();
 			$("#requirements").append('<li>Canvas: ' + hasCanvas + '</li>')
@@ -25,7 +25,4 @@ var Compatibility = (function(){
 			requestAnimationFrameFunc(func, element);
 		}
 	};
-	
-	return pub;
-	
 })();

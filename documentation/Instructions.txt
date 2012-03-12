@@ -10,3 +10,5 @@
 -use the load button to load saved world state
 
 You will need to reset upon death
+
+You may add a custom soundtrack by dragging a compatible audio file to the music settings tab.

@@ -14,8 +14,13 @@ var Helper = function(){
 		return assigneeObj;
 	}
 	
+	function isHosted(){
+		return window.location.href.indexOf('http') != -1 && window.location.href.indexOf('chrome-extension'); 
+	}
+	
 	return {
 		random: random,
-		assignProps: assignProps
+		assignProps: assignProps,
+		isHosted: isHosted
 	};
 }();

@@ -1,4 +1,4 @@
-var GAME_VERSION = "0.06";
+var GAME_VERSION = "0.07";
 
 var Screen = {
 	absPositionToRenderPosition : function(position){
@@ -277,6 +277,7 @@ var Engine = (function(){
 		}
 		
 		worldInit(map);
+		audioInit();
 		
 		Compatibility.requestAnimationFrame(step, Screen.canvas);
 		
@@ -311,6 +312,9 @@ var Engine = (function(){
 		loadCamera(map);
 		loadEnemies(map);
 		Engine.map = map;
+	};
+	var audioInit = function(){
+		Audio.getAudio('shovel', 'audio/shovel.mp3');
 	};
 	
 	var getInput = function(time){
@@ -362,6 +366,9 @@ var Engine = (function(){
 			Player.isFacingRight = true;
 		}
 		if(Keyboard.pressedKeys.up){
+		}
+		if(Keyboard.pressedKeys.one){
+			Audio.playBuffer("shovel");
 		}
 		if(Keyboard.pressedKeys.down && !Player.animation.getCurrentFrameset().noOverride){
 			Player.animation.frameset("crouch");
@@ -437,9 +444,3 @@ function loadCamera(map){
 	Camera.position.x = map.width / 2;
 	Camera.position.y = map.height / 2;
 }
-
-$(document).ready(function(){
-	var map = World.newMap(60,40,16);
-	Engine.init(map);
-	$("#version").text(GAME_VERSION);
-});

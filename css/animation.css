@@ -1,0 +1,37 @@
+@-webkit-keyframes setting-slideout{
+	from { width: 0px; display: none;}
+	to { width: 300px; display: block;}
+}
+
+@-webkit-keyframes setting-slidein{
+	from { width: 300px; display: block; }
+	to { width: 0px; display: none;}
+}
+
+div.settings .settings-main.slideout {
+	-webkit-animation-name : setting-slideout;
+	-webkit-animation-duration: 0.5s;
+	-webkit-animation-fill-mode: forwards;
+	-webkit-animation-timing-function:linear;
+}
+
+div.settings .settings-main.slidein {
+	-webkit-animation-name : setting-slidein;
+	-webkit-animation-duration: 0.5s;
+	-webkit-animation-fill-mode: forwards;
+	-webkit-animation-timing-function:linear;
+}
+
+div.settings .settings-main audio.slideout  {
+	-webkit-animation-name : setting-slideout;
+	-webkit-animation-duration: 0.5s;
+	-webkit-animation-fill-mode: forwards;
+	-webkit-animation-timing-function:linear;
+}
+
+div.settings .settings-main audio.slidein {
+	-webkit-animation-name : setting-slidein;
+	-webkit-animation-duration: 0.5s;
+	-webkit-animation-fill-mode: forwards;
+	-webkit-animation-timing-function:linear;
+}

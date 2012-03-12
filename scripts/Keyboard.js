@@ -11,7 +11,8 @@ var Keyboard = (function(){
 		38 : "up",
 		39 : "right",
 		40 : "down",
-		49 : "one"
+		49 : "one",
+		50 : "two"
 	};
 	
 	var pressedKeys = {};
