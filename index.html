@@ -6,6 +6,7 @@
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 		<script type="text/javascript" src="scripts/BrowserTweaks.js"></script>
 		<script type="text/javascript" src="scripts/Helper.js"></script>
+		<script type="text/javascript" src="scripts/QueryString.js"></script>
 		<script type="text/javascript" src="scripts/Keyboard.js"></script>
 		<script type="text/javascript" src="scripts/Compatibility.js"></script>
 		<script type="text/javascript" src="scripts/Globals.js"></script>
@@ -22,87 +23,100 @@
 		<link rel="stylesheet" type="text/css" href="css/animation.css">
 	</head>
 	<body>
-		<div class="settings">
-			<div class="settings-main">
-				<div class="tab-content" id="content-audio" >
+		<div class="content-wrapper">
+			<div class="settings">
+				<div class="settings-main">
+					<div class="tab-content hidden" id="content-audio" >
+						<span>Drag Audio File Here</span>
+					</div>
+					<div class="tab-content hidden" id="content-page" >
+						<label>Hide ads</label>
+						<input type="checkbox" id="chkAds" />
+					</div>
+				</div>
+				<div class="settings-tabs">
+					<div class="tab" id="tab-audio">
+					</div>
+					<div class="tab" id="tab-page">
+					</div>
 				</div>
 			</div>
-			<div class="settings-tabs">
-				<div class="tab" id="tab-audio">
+			<div class="main">
+				<canvas id="cvsScreen" width="1280" height="720">
+					Browser does not support this element.
+				</canvas>
+				<br />
+				<div>
+					<table>
+						<tr>
+							<td>
+								<input type="button" value="Save" id="btnSave" />
+							</td>
+							<td>
+								<input type="button" value="Load" id="btnLoad" />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<span>FPS:</span>
+							</td>
+							<td>
+								<span id="fps"></span>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<span>Last Key:</span>
+							</td>
+							<td>
+								<span id="lastkey"></span>
+							</td>
+						</tr>
+						<!--<tr>
+							<td>
+								<span>Frameset:</span>
+							</td>
+							<td>
+								<span id="frameset"></span>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Camera Position:
+							</td>
+							<td id="camera-position">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Player Position:
+							</td>
+							<td id="player-position">
+							</td>
+						</tr>-->
+						<tr>
+							<td>
+								Version:
+							</td>
+							<td>
+								<span id="version"></span> (<a href="documentation/changelog.txt">Changelog</a>)
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2"><a href="documentation/instructions.txt">Instructions</a>&nbsp;|&nbsp;<a href="documentation/credits.txt">Credits</a></td>
+						</tr>
+					</table>
+				</div>
+				<br />
+				<div>
+					<ul id="requirements">
+					</ul>
 				</div>
 			</div>
 		</div>
-		<div class="main">
-			<canvas id="cvsScreen" width="1280" height="720">
-				Browser does not support this element.
-			</canvas>
-			<br />
-			<div>
-				<table>
-					<tr>
-						<td>
-							<input type="button" value="Save" id="btnSave" />
-						</td>
-						<td>
-							<input type="button" value="Load" id="btnLoad" />
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<span>FPS:</span>
-						</td>
-						<td>
-							<span id="fps"></span>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<span>Last Key:</span>
-						</td>
-						<td>
-							<span id="lastkey"></span>
-						</td>
-					</tr>
-					<!--<tr>
-						<td>
-							<span>Frameset:</span>
-						</td>
-						<td>
-							<span id="frameset"></span>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							Camera Position:
-						</td>
-						<td id="camera-position">
-						</td>
-					</tr>
-					<tr>
-						<td>
-							Player Position:
-						</td>
-						<td id="player-position">
-						</td>
-					</tr>-->
-					<tr>
-						<td>
-							Version:
-						</td>
-						<td>
-							<span id="version"></span> (<a href="documentation/changelog.txt">Changelog</a>)
-						</td>
-					</tr>
-					<tr>
-						<td colspan="2"><a href="documentation/instructions.txt">Instructions</a>&nbsp;|&nbsp;<a href="documentation/credits.txt">Credits</a></td>
-					</tr>
-				</table>
-			</div>
-			<br />
-			<div>
-				<ul id="requirements">
-				</ul>
-			</div>
-		</div>
+		<div id="ads">
+			<script type="text/javascript" src="scripts/Ads.js"></script>
+			<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+		<div>
 	</body>
 </html>

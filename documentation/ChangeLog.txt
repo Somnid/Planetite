@@ -60,3 +60,4 @@ v 0.07
 -Settings menu
 -Custom soudtrack
 -WebAudio SFX
+-Ads
