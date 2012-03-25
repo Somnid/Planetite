@@ -2,8 +2,24 @@
 	from { width: 0px; display: none;}
 	to { width: 300px; display: block;}
 }
+@-moz-keyframes setting-slideout{
+	from { width: 0px; display: none;}
+	to { width: 300px; display: block;}
+}
+@-ms-keyframes setting-slideout{
+	from { width: 0px; display: none;}
+	to { width: 300px; display: block;}
+}
 
 @-webkit-keyframes setting-slidein{
+	from { width: 300px; display: block; }
+	to { width: 0px; display: none;}
+}
+@-moz-keyframes setting-slidein{
+	from { width: 300px; display: block; }
+	to { width: 0px; display: none;}
+}
+@-ms-keyframes setting-slidein{
 	from { width: 300px; display: block; }
 	to { width: 0px; display: none;}
 }
@@ -13,6 +29,14 @@ div.settings .settings-main.slideout {
 	-webkit-animation-duration: 0.5s;
 	-webkit-animation-fill-mode: forwards;
 	-webkit-animation-timing-function:linear;
+	-moz-animation-name : setting-slideout;
+	-moz-animation-duration: 0.5s;
+	-moz-animation-fill-mode: forwards;
+	-moz-animation-timing-function:linear;
+	-ms-animation-name : setting-slideout;
+	-ms-animation-duration: 0.5s;
+	-ms-animation-fill-mode: forwards;
+	-ms-animation-timing-function:linear;
 }
 
 div.settings .settings-main.slidein {
@@ -20,6 +44,14 @@ div.settings .settings-main.slidein {
 	-webkit-animation-duration: 0.5s;
 	-webkit-animation-fill-mode: forwards;
 	-webkit-animation-timing-function:linear;
+	-moz-animation-name : setting-slidein;
+	-moz-animation-duration: 0.5s;
+	-moz-animation-fill-mode: forwards;
+	-moz-animation-timing-function:linear;
+	-ms-animation-name : setting-slidein;
+	-ms-animation-duration: 0.5s;
+	-ms-animation-fill-mode: forwards;
+	-ms-animation-timing-function:linear;
 }
 
 div.settings .settings-main .slideout  {
@@ -27,6 +59,14 @@ div.settings .settings-main .slideout  {
 	-webkit-animation-duration: 0.5s;
 	-webkit-animation-fill-mode: forwards;
 	-webkit-animation-timing-function:linear;
+	-moz-animation-name : setting-slideout;
+	-moz-animation-duration: 0.5s;
+	-moz-animation-fill-mode: forwards;
+	-moz-animation-timing-function:linear;
+	-ms-animation-name : setting-slideout;
+	-ms-animation-duration: 0.5s;
+	-ms-animation-fill-mode: forwards;
+	-ms-animation-timing-function:linear;
 }
 
 div.settings .settings-main .slidein {
@@ -34,4 +74,12 @@ div.settings .settings-main .slidein {
 	-webkit-animation-duration: 0.5s;
 	-webkit-animation-fill-mode: forwards;
 	-webkit-animation-timing-function:linear;
+	-moz-animation-name : setting-slidein;
+	-moz-animation-duration: 0.5s;
+	-moz-animation-fill-mode: forwards;
+	-moz-animation-timing-function:linear;
+	-ms-animation-name : setting-slidein;
+	-ms-animation-duration: 0.5s;
+	-ms-animation-fill-mode: forwards;
+	-ms-animation-timing-function:linear;
 }

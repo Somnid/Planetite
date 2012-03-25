@@ -27,8 +27,17 @@ var World = (function(){
 		}
 		
 		if(this.hp <= 0){
+			if(this.type == "rock" || this.type == "ore"){
+				AudioPlayer.playBuffer("rock_break");
+			}else{
+				AudioPlayer.playBuffer("shovel");
+			}
 			this.type = "null";
 			this.isSolid = false;
+		}else{
+			if(this.type == "rock" || this.type == "ore"){
+				AudioPlayer.playBuffer("shovel_rock");
+			}
 		}
 	};
 	

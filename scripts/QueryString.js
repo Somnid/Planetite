@@ -3,8 +3,13 @@ var QueryString = (function(){
 	var cachedKeyVals;
 	
 	var parse = function(queryString){
-		queryString = queryString.split('?')[1] || window.location.search.substr(1);
-		if(queryString == "") return {};
+		if(queryString == null || queryString == undefined){
+			queryString =  window.location.search.substr(1);
+		}else{
+			queryString = queryString.split('?')[1];
+		}
+		if(queryString == "" || queryString == null || queryString == undefined) return {};
+		
 		keyvalSplit = queryString.split("&");
 		var keyvals = {};
 		for(var i = 0;i < keyvalSplit.length; i++){

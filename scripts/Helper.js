@@ -15,7 +15,7 @@ var Helper = function(){
 	}
 	
 	function isHosted(){
-		return window.location.href.indexOf('http') != -1 && window.location.href.indexOf('chrome-extension'); 
+		return window.location.href.indexOf('http') != -1 || window.location.href.indexOf('chrome-extension') != -1; 
 	}
 	
 	return {

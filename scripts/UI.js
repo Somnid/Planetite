@@ -44,28 +44,40 @@ var UI = (function(){
 				var file = files[i];
 				var reader = new FileReader();
 				reader.onload = function(e){
-					$('#content-audio').append('<audio controls><source src="' + e.target.result + '" type="audio/mp3" /></controls>');
+					$('#content-audio').append('<p>' + file.name + '</p>');
+					$('#content-audio').append('<audio controls onended="Soundtrack.advanceIndex()" onerror="Soundtrack.error()"><source src="' + e.target.result + '" type="audio/mp3" /></audio>');
+					Soundtrack.playSet();
 				};
 				reader.onerror = function(e){ console.log(e);};
 				reader.readAsDataURL(file);
 			}
 		});
-		$('.settings-main').on("webkitAnimationEnd", function(){
-			if($('.settings-main').hasClass('slidein')){
-				$('.tab-content').children().hide();
-			}
-		});
-		$('.settings-main').on("webkitAnimationStart", function(){
-			if($('.settings-main').hasClass('slideout')){
-				$('.tab-content').children().show();
-			}
-		});
+		$('.settings-main').on("webkitAnimationEnd", handleSettingsAnimationEnd);
+		$('.settings-main').on("mozAnimationEnd", handleSettingsAnimationEnd);
+		$('.settings-main').on("msAnimationEnd", handleSettingsAnimationEnd);
+		
+		$('.settings-main').on("webkitAnimationStart", handleSettingsAnimationStart);
+		$('.settings-main').on("mozAnimationStart", handleSettingsAnimationStart);
+		$('.settings-main').on("msAnimationStart", handleSettingsAnimationStart);
+		
 		$('#chkAds').change(function(){
 			var checked = $(this).is(':checked');
 			$('#ads').toggle(!checked);
 			localStorage.setItem('noAds', checked);
 			
 		});
+	};
+	
+	var handleSettingsAnimationEnd = function(){
+		if($('.settings-main').hasClass('slidein')){
+			$('.tab-content').children().hide();
+		}
+	};
+	
+	var handleSettingsAnimationStart = function(){
+		if($('.settings-main').hasClass('slideout')){
+			$('.tab-content').children().show();
+		}
 	};
 	
 	var switchSettingTab = function(tab){

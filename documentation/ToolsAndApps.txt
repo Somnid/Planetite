@@ -1,0 +1,27 @@
+OS:
+Windows
+
+Images:
+Paint
+Gimp
+
+Audio:
+Audacity
+Zune
+Windows Media Player
+
+Browser:
+Google Chrome
+Mozilla FireFox
+Microsoft Internet Explorer
+
+Text:
+Notepad++
+Notepad
+
+Version Control And Hosting:
+Git
+Git Hub
+
+Misc:
+www.colorpicker.com

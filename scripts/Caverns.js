@@ -314,7 +314,10 @@ var Engine = (function(){
 		Engine.map = map;
 	};
 	var audioInit = function(){
-		Audio.getAudio('shovel', 'audio/shovel.mp3');
+		AudioPlayer.getAudio('shovel', 'audio/shovel.wav');
+		AudioPlayer.getAudio('shovel_rock', 'audio/shovel_rock.wav');
+		AudioPlayer.getAudio('rock_break', 'audio/rock_break.wav');
+		AudioPlayer.getAudio('hurt', 'audio/hurt.wav');
 	};
 	
 	var getInput = function(time){
@@ -368,7 +371,6 @@ var Engine = (function(){
 		if(Keyboard.pressedKeys.up){
 		}
 		if(Keyboard.pressedKeys.one){
-			Audio.playBuffer("shovel");
 		}
 		if(Keyboard.pressedKeys.down && !Player.animation.getCurrentFrameset().noOverride){
 			Player.animation.frameset("crouch");

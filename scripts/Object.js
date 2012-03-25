@@ -242,6 +242,7 @@ PlayerObject.prototype.attacked = function(damage, isRightSide){
 		this.hp -= damage;
 		this.velocity.x += 10 * flip;
 		this.velocity.y += -10;
+		AudioPlayer.playBuffer("hurt");
 		if(this.hp <= 0){
 			this.animation.frameset("dead");
 			this.aiFunc = AI.none;

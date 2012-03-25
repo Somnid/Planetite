@@ -1,10 +1,12 @@
 var Compatibility = (function(){
 	
 	var requestAnimationFrameFunc = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.msRequestAnimationFrame;
+	var audioContextFunc = window.audioContext || window.webkitAudioContext || window.mozAudioContext || window.msAudioContext;
 	
 	var hasCanvas = !!document.createElement('canvas').getContext;
 	var hasAnimationFrame = !!requestAnimationFrameFunc;
 	var hasLocalStorage = !!window.localStorage;
+	var hasWebAudio =  !!window.audioContextFunc;
 	
 	//optional
 	var hasGamepads = !!navigator.webkitGamepads || !!navigator.mozGamepads;
@@ -15,6 +17,7 @@ var Compatibility = (function(){
 			$("#requirements").append('<li>Canvas: ' + hasCanvas + '</li>')
 			$("#requirements").append('<li>RequestAnimationFrame: ' + hasAnimationFrame + '</li>')
 			$("#requirements").append('<li>LocalStorage: ' + hasLocalStorage + '</li>')
+			$("#requirements").append('<li>WebAudio: ' + hasWebAudio + '</li>')
 			
 			//optional
 			$("#requirements").append('<li>Gamepad: ' + hasGamepads + '</li>')
@@ -23,6 +26,7 @@ var Compatibility = (function(){
 		},
 		requestAnimationFrame: function(func, element){
 			requestAnimationFrameFunc(func, element);
-		}
+		},
+		hasWebAudio : hasWebAudio
 	};
 })();

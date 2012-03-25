@@ -1,14 +1,18 @@
+ul, li { list-style: none; }
+
+
 body { text-align: center; margin: 0px; }
 #cvsScreen { border-style: solid; border-width: 1px; border-color: #000000;}
 div.main { display: inline; }
 div.main div {display: inline-block;}
 div.main ul {text-align: left;}
-div.settings { height: 100%;position: fixed; }
+div.settings { height: 100%;position: fixed; z-index: 1;}
 div.settings .settings-tabs { width: 50px; height: 100%; background-color: #CCCCCC; float:left; }
 div.settings .settings-main { height: 100%; background-color: #333333; float: left; width: 0px;}
 div.settings .settings-main  .tab-content { height: 100%; color: white; overflow: hidden; }
-#tab-audio {  background-color:#CC00FF; height: 50px; width: 50px; cursor: pointer; }
-#tab-page{  background-color:#00FF00; height: 50px; width: 50px; cursor: pointer; }
-#content-audio audio { display: block; position: absolute; left: 0px;}
+#tab-audio {  height: 50px; width: 50px; cursor: pointer; background: #9F19D4 url(/Images/note.png) no-repeat 8px 8px; }
+#tab-page{  height: 50px; width: 50px; cursor: pointer; background: #0B9616 url(/Images/page.png) no-repeat 8px 8px; }
+#content-audio audio { display: block; left: 0px;}
+#content-audio p { margin: 0px; text-align: left; }
 #ads { width: 100%; position: fixed; bottom: 0px; }
 .hidden { display: none; }
