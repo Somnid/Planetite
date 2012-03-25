@@ -10,8 +10,8 @@ div.settings { height: 100%;position: fixed; z-index: 1;}
 div.settings .settings-tabs { width: 50px; height: 100%; background-color: #CCCCCC; float:left; }
 div.settings .settings-main { height: 100%; background-color: #333333; float: left; width: 0px;}
 div.settings .settings-main  .tab-content { height: 100%; color: white; overflow: hidden; }
-#tab-audio {  height: 50px; width: 50px; cursor: pointer; background: #9F19D4 url(/images/Note.png) no-repeat 8px 8px; }
-#tab-page{  height: 50px; width: 50px; cursor: pointer; background: #0B9616 url(/images/Page.png) no-repeat 8px 8px; }
+#tab-audio {  height: 50px; width: 50px; cursor: pointer; background: #9F19D4 url(../images/Note.png) no-repeat 8px 8px; }
+#tab-page{  height: 50px; width: 50px; cursor: pointer; background: #0B9616 url(../images/Page.png) no-repeat 8px 8px; }
 #content-audio audio { display: block; left: 0px;}
 #content-audio p { margin: 0px; text-align: left; }
 #ads { width: 100%; position: fixed; bottom: 0px; }
