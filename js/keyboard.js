@@ -16,13 +16,13 @@ var Keyboard = (function(){
 	
 	var pressedKeys = {};
 	
-	$(document).keydown(function(e){
+	document.addEventListener("keydown", function(e){
 		pressedKeys[keyMapper[e.which]] = true;
-	});
+	}, true);
 	
-	$(document).keyup(function(e){
+	document.addEventListener("keyup", function(e){
 		pressedKeys[keyMapper[e.which]] = false;
-	});
+	}, true);
 	
 	function isAnyPressed(){
 		for(key in pressedKeys){

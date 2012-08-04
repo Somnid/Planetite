@@ -250,3 +250,28 @@ PlayerObject.prototype.attacked = function(damage, isRightSide){
 		}
 	}
 };
+
+PlayerObject.prototype.attack = function(){
+	var length = 20;
+	var leftEdge;
+	var rightEdge;
+	var topEdge = Player.position.y;
+	var bottomEdge = Player.getBottom();
+	if(Player.isFacingRight){
+		leftEdge = Player.getRight();
+		rightEdge = Player.getRight() + length;
+	}else{
+		leftEdge = Player.position.x - length;
+		rightEdge = Player.position.x;
+	}
+	
+	for(var i = 0; i < Enemy.length; i++){
+		var enemy = Enemy[i];
+		if(((enemy.position.x > leftEdge && enemy.position.x < rightEdge)
+				|| (enemy.getRight() > leftEdge && enemy.getRight() < rightEdge))
+			&& (enemy.position.y > topEdge && enemy.position.y < bottomEdge)
+				|| (enemy.getBottom() > topEdge && enemy.getBottom() < bottomEdge)){
+					enemy.attacked(Player.inventory.sword.power, Player.isFacingRight);
+		}
+	}
+};

@@ -1,0 +1,98 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Planetite</title>
+		<script type="text/javascript" src="js/analytics.js"></script>
+		<script type="text/javascript" src="js/browserTweaks.js"></script>
+		<script type="text/javascript" src="js/helper.js"></script>
+		<script type="text/javascript" src="js/keyboard.js"></script>
+		<script type="text/javascript" src="js/compatibility.js"></script>
+		<script type="text/javascript" src="js/globals.js"></script>
+		<script type="text/javascript" src="js/renderer.js"></script>
+		<script type="text/javascript" src="js/engine.js"></script>
+		<script type="text/javascript" src="js/item.js"></script>
+		<script type="text/javascript" src="js/object.js"></script>
+		<script type="text/javascript" src="js/animation.js"></script>
+		<script type="text/javascript" src="js/AI.js"></script>
+		<script type="text/javascript" src="js/menu.js"></script>
+		<script type="text/javascript" src="js/world.js"></script>
+		<script type="text/javascript" src="js/caverns.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/caverns.css">
+	</head>
+	<body>
+		<div class="main">
+			<canvas id="cvsScreen" width="640" height="480">
+				Browser does not support this element.
+			</canvas>
+			<br />
+			<div>
+				<table>
+					<tr>
+						<td>
+							<input type="button" value="Save" id="btnSave" />
+						</td>
+						<td>
+							<input type="button" value="Load" id="btnLoad" />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<span>FPS:</span>
+						</td>
+						<td>
+							<span id="fps"></span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<span>Last Key:</span>
+						</td>
+						<td>
+							<span id="lastkey"></span>
+						</td>
+					</tr>
+					<!--<tr>
+						<td>
+							<span>Frameset:</span>
+						</td>
+						<td>
+							<span id="frameset"></span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Camera Position:
+						</td>
+						<td id="camera-position">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Player Position:
+						</td>
+						<td id="player-position">
+						</td>
+					</tr>-->
+					<tr>
+						<td>
+							Version:
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<a href="docs/instructions.txt">Instructions</a>&nbsp;|&nbsp;
+							<a href="docs/credits.txt">Credits</a>&nbsp;|&nbsp;
+							<a href="http://somnid.blogspot.com/">Blog</a>&nbsp;|&nbsp;
+							<a href="docs/changelog.txt">Changelog</a>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<br />
+			<div>
+				<ul id="requirements">
+				</ul>
+			</div>
+		</div>
+	</body>
+</html>
