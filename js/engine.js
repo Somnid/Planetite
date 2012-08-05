@@ -139,7 +139,7 @@ var engine = (function(){
 		
 		//DEBUG
 		document.addEventListener("keydown", function(e){
-			documet.getElementById("lastkey").innerHTML = e.keyCode;
+			document.getElementById("lastkey").innerHTML = e.keyCode;
 		}, true);
 		document.getElementById("btnSave").addEventListener("click", function(){
 			console.log(engine.map.save());
