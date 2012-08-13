@@ -5,14 +5,7 @@ var engine = (function(){
 	var lastAnimationTick = 0;
 	var isPaused = false;
 	var isMenu = false;
-	
-	function initScreen (){
-		lastTime = window.webkitAnimationStartTime;
-		Screen.canvas = document.getElementById("cvsScreen");
-		Screen.context = Screen.canvas.getContext("2d");
-		Screen.resolution = { x: Screen.canvas.width, y: Screen.canvas.height };
-		Screen.center = { x: Screen.canvas.width/2, y: Screen.canvas.height/2};
-	}
+	var isDebug = false;
 	
 	function togglePause(toggle){
 		if(toggle != undefined){
@@ -21,11 +14,19 @@ var engine = (function(){
 			isPaused = !isPaused;
 		}
 	}
+	
+	function toggleDebug(toggle){
+		if(toggle != undefined){
+			isDebug = toggle;
+		}else{
+			isDebug = !isDebug;
+		}
+	}
 
 	function step(time){
 		//fps timer
 		var interval = time - lastTime;
-		document.getElementById("fps").innerHTML = (Math.floor(1000 / interval));
+		document.getElementById("fps").innerHTML = (Math.floor(1000 / interval)).toFixed(0);
 		//document.getElementById("player-position").innerHTML = (Player.position.x + "x " + Player.position.y + "y");
 		//document.getElementById("camera-position").innerHTML = (Camera.position.x + "x " + Camera.position.y + "y");
 		//document.getElementById("frameset").innerHTML = (Player.animation.frameset());
@@ -41,8 +42,7 @@ var engine = (function(){
 		}
 		
 		//clear
-		Screen.context.fillStyle="#FFFFFF";
-		Screen.context.fillRect(0, 0, Screen.resolution.x, Screen.resolution.y);
+		renderer.clearScreen();
 		
 		//draw landscape
 		engine.map.draw();
@@ -62,7 +62,11 @@ var engine = (function(){
 		if(isMenu){
 			Menu.draw();
 		}
+		//debug
+		var debugDisplay = isDebug ? "block" : "none";
+		document.querySelector("#debug .info").style.display = debugDisplay;
 		
+		renderer.present();
 		lastTime = time;
 		
 		if(isPaused) return;
@@ -99,14 +103,14 @@ var engine = (function(){
 	
 	//TODO: move into it's own thing
 	function sideDig(){
-		for(var i = 0; Player.position.y - Map.gridSize + 1 + (i*Map.gridSize) < Player.getBottom(); i++){
+		for(var i = 0; Player.position.y - engine.map.gridSize + 1 + (i*engine.map.gridSize) < Player.getBottom(); i++){
 			var x = Player.isFacingRight 
-				? Player.getRight() + Map.gridSize - 1
-				: Player.position.x - Map.gridSize + 1;
+				? Player.getRight() + engine.map.gridSize - 1
+				: Player.position.x - engine.map.gridSize + 1;
 				
-			var y = Player.position.y - Map.gridSize + 1 + (i*Map.gridSize);
+			var y = Player.position.y - engine.map.gridSize + 1 + (i*engine.map.gridSize);
 			
-			var tile = Map.getTileAt(x, y); 
+			var tile = engine.map.getTileAt(x, y); 
 			if(tile.type != "null"){
 				tile.attack(Player.inventory.pickaxe.power);
 				return;
@@ -120,7 +124,7 @@ var engine = (function(){
 			return false;
 		}
 		
-		initScreen();
+		renderer.initBuffer();
 		
 		//REFACTOR into own resource loaded
 		map.loadTile("black", "black.png");
@@ -135,6 +139,7 @@ var engine = (function(){
 		engine.map = map;
 		//End REFACTOR
 		
+		lastTime = window.webkitAnimationStartTime;
 		Compatibility.requestAnimationFrame(step, Screen.canvas);
 		
 		//DEBUG
@@ -154,6 +159,10 @@ var engine = (function(){
 			togglePause();
 			Keyboard.pressedKeys.esc = false;
 		}
+		if(Keyboard.pressedKeys.tilde){
+			toggleDebug();
+			Keyboard.pressedKeys.tilde = false;
+		}
 		if((Keyboard.pressedKeys.ctrl && Keyboard.pressedKeys.right) || (Keyboard.pressedKeys.ctrl && Keyboard.pressedKeys.left)){
 			sideDig();
 			Keyboard.pressedKeys.ctrl = false;
@@ -167,7 +176,7 @@ var engine = (function(){
 			Player.animation.lastTick = time;
 		}
 		if(Keyboard.pressedKeys.ctrl){
-			Map.getTileAt(Player.position.x + (Player.width / 2), Player.getBottom()+ Map.gridSize - 1, 0).attack(Player.inventory.shovel.power);
+			engine.map.getTileAt(Player.position.x + (Player.width / 2), Player.getBottom()+ engine.map.gridSize - 1, 0).attack(Player.inventory.shovel.power);
 			Keyboard.pressedKeys.ctrl = false;
 			Player.animation.frameset("dig");
 			Player.animation.lastTick = time;

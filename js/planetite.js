@@ -1,5 +1,6 @@
 var GAME_VERSION = "0.07a";
 
+//SCREEN VARS
 var Screen = {
 	absPositionToRenderPosition : function(position){
 		var x = position.x - (Camera.position.x - Screen.center.x);
@@ -9,6 +10,7 @@ var Screen = {
 	}
 };
 
+//PLAYER VARS
 var Player = new PlayerObject(new Animator.animation({
 	"idle" : {
 		frames: [new Animator.frame({frameHeight: 32, frameWidth: 16, duration: 142})],
@@ -66,8 +68,7 @@ var Player = new PlayerObject(new Animator.animation({
 	}
 }),3,3);
 
-//Enemies Initilization
-
+//ENEMY VARS
 var spider = new Object(new Animator.animation({
 				"idle" : {
 					frames: [new Animator.frame({frameHeight: 10, frameWidth: 23, duration: 142}),
@@ -99,7 +100,6 @@ var spiney = new Object(new Animator.animation({
 					noOverride: true
 				}
 			}),3, 1, AI.clinger);
-
 
 var Enemy = [spider, spiney];
 
@@ -153,7 +153,12 @@ function loadCamera(map){
 }
 
 document.addEventListener("DOMContentLoaded",function(){
-	var map = World.newMap(60,40,16);
+	var canvas = document.getElementById("cvsScreen");
+	var map = World.newMap(500,500,16);
 	engine.init(map);
 	document.getElementById("version").innerHTML = GAME_VERSION;
 });
+
+window.onresize = function(){
+	renderer.initBuffer();
+};

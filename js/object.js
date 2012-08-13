@@ -81,11 +81,7 @@ Object.prototype.draw = function(){
 	var framesetOffset = getFramesetOffset.call(this, this.animation.frameset());
 	var frameOffset = getFrameOffset.call(this, this.animation.frame);
 	
-	Screen.context.save();
-	Screen.context.translate(renderPosition.x + flipTranslate + (currentFrame.offset.x * flip), renderPosition.y + currentFrame.offset.y)
-	Screen.context.transform(flip, 0, 0, 1, 0, 0)
-	Screen.context.drawImage(this.sprite, frameOffset, framesetOffset, currentFrame.frameWidth, currentFrame.frameHeight, 0, 0, currentFrame.frameWidth, currentFrame.frameHeight);
-	Screen.context.restore();
+	renderer.drawSprite(this.sprite, renderPosition, flip, flipTranslate, currentFrame, frameOffset, framesetOffset);
 };
 
 Object.prototype.updatePosition = function(time, map){

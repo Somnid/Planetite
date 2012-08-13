@@ -1,0 +1,35 @@
+html, body, div, canvas,
+ul, ol, li  { margin: 0; padding: 0}
+ul, ol, li { list-style: none; list-style-type: none;}
+
+html {
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+}
+body {
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+}
+#debug { 
+	width: 100%;
+	display: block;
+	position: fixed;
+	top: 0px;
+	right: 0px;
+}
+#debug table { background-color: #FFF; }
+#requirements li{
+	float: right;
+	margin-right: 10px;
+}
+#main {
+	display: -webkit-flex;
+	-webkit-justify-content: center;
+	-webkit-align-items: center;
+	width: 100%;
+	height: 100%;
+	-webkit-flex: auto;
+}
+#cvsScreen { width: 100%; height: 100%; }

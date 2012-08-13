@@ -16,84 +16,54 @@
 		<script type="text/javascript" src="js/AI.js"></script>
 		<script type="text/javascript" src="js/menu.js"></script>
 		<script type="text/javascript" src="js/world.js"></script>
-		<script type="text/javascript" src="js/caverns.js"></script>
-		<link rel="stylesheet" type="text/css" href="css/caverns.css">
+		<script type="text/javascript" src="js/planetite.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/planetite.css">
 	</head>
 	<body>
-		<div class="main">
-			<canvas id="cvsScreen" width="640" height="480">
+		<div id="debug">
+			<table>
+				<tr class="info">
+					<td>
+						<input type="button" value="Save" id="btnSave" />
+					</td>
+					<td>
+						<input type="button" value="Load" id="btnLoad" />
+					</td>
+					<td>
+						<span>FPS:</span>
+					</td>
+					<td>
+						<span id="fps"></span>
+					</td>
+					<td>
+						<span>Last Key:</span>
+					</td>
+					<td>
+						<span id="lastkey"></span>
+					</td>
+					<td>
+						Version:
+					</td>
+					<td id="version"></td>
+					<td>
+						<ul id="requirements">
+						</ul>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="8">
+						<a href="docs/instructions.txt">Instructions</a>&nbsp;|&nbsp;
+						<a href="docs/credits.txt">Credits</a>&nbsp;|&nbsp;
+						<a href="http://somnid.blogspot.com/">Blog</a>&nbsp;|&nbsp;
+						<a href="docs/changelog.txt">Changelog</a>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div id="main">
+			<canvas id="cvsScreen">
 				Browser does not support this element.
 			</canvas>
-			<br />
-			<div>
-				<table>
-					<tr>
-						<td>
-							<input type="button" value="Save" id="btnSave" />
-						</td>
-						<td>
-							<input type="button" value="Load" id="btnLoad" />
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<span>FPS:</span>
-						</td>
-						<td>
-							<span id="fps"></span>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<span>Last Key:</span>
-						</td>
-						<td>
-							<span id="lastkey"></span>
-						</td>
-					</tr>
-					<!--<tr>
-						<td>
-							<span>Frameset:</span>
-						</td>
-						<td>
-							<span id="frameset"></span>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							Camera Position:
-						</td>
-						<td id="camera-position">
-						</td>
-					</tr>
-					<tr>
-						<td>
-							Player Position:
-						</td>
-						<td id="player-position">
-						</td>
-					</tr>-->
-					<tr>
-						<td>
-							Version:
-						</td>
-						<td id="version"></td>
-					</tr>
-					<tr>
-						<td colspan="2">
-							<a href="docs/instructions.txt">Instructions</a>&nbsp;|&nbsp;
-							<a href="docs/credits.txt">Credits</a>&nbsp;|&nbsp;
-							<a href="http://somnid.blogspot.com/">Blog</a>&nbsp;|&nbsp;
-							<a href="docs/changelog.txt">Changelog</a>
-						</td>
-					</tr>
-				</table>
-			</div>
-			<br />
-			<div>
-				<ul id="requirements">
-				</ul>
-			</div>
 		</div>
 	</body>
 </html>

@@ -46,10 +46,12 @@ var World = (function(){
 			return this.grid[gx][gy];
 		};
 		
+		
+		//USED?
 		this.getWidth = function(){
 			return this.gridSize * this.gridWidth;
 		};
-		
+		//USED?
 		this.getHeight = function(){
 			return this.gridSize * this.gridHeight;
 		};
@@ -61,16 +63,28 @@ var World = (function(){
 		};
 		
 		this.draw = function(){
-			for(var i = 0; i < this.grid.length; i++){
-				for(var j = 0; j < this.grid[i].length; j++){
+			var clipBounds = this.getTileClipBounds();
+			
+			for(var i = clipBounds.xStart; i < clipBounds.xEnd; i++){
+				for(var j = clipBounds.yStart; j < clipBounds.yEnd; j++){
 					var renderPosition = Screen.absPositionToRenderPosition({x: (i*this.gridSize), y: (j*this.gridSize) });
-					var tile = this.grid[i][j]
+					var tile = this.grid[i][j];
 					if(tile.type != "null"){
-						Screen.context.drawImage(this.tiles[tile.type], tile.frame * this.gridSize, 0, this.gridSize, this.gridSize, renderPosition.x, renderPosition.y, this.gridSize, this.gridSize);
+						//Screen.context.drawImage(this.tiles[tile.type], tile.frame * this.gridSize, 0, this.gridSize, this.gridSize, renderPosition.x, renderPosition.y, this.gridSize, this.gridSize);
+						renderer.drawTile(this.tiles[tile.type], tile.frame * this.gridSize, this.gridSize, renderPosition.x, renderPosition.y)
 					}
 				}
 			}
 		};
+		
+		this.getTileClipBounds = function(){
+			return {
+				xStart : Math.floor((Camera.position.x - Screen.center.x) / this.gridSize),
+				xEnd : Math.ceil((Camera.position.x + Screen.center.x) / this.gridSize),
+				yStart : Math.floor((Camera.position.y - Screen.center.y) / this.gridSize),
+				yEnd : Math.ceil((Camera.position.y + Screen.center.y) / this.gridSize)
+			};
+		}
 		
 		this.save = function(){
 			return JSON.stringify({
@@ -85,19 +99,19 @@ var World = (function(){
 		return this;
 	};
 	
-	var Map = function(width, height, size){
+	var Map = function(width, height, size, chunkSize){
 		this.tiles = {};
 		this.grid = null;
 		this.gridWidth = width;
 		this.gridHeight = height;
 		this.gridSize = size;
 		this.grid = new Array();
+		
 		return this;
 	};
 	Map.prototype = new MapProto();
 	
-	function newMap(width, height, size){		
-
+	function newMap(width, height, size){
 		var map = new Map(width, height, size);
 		
 		for(var i = 0; i < map.gridWidth; i++){
