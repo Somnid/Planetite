@@ -12,17 +12,12 @@ body {
 	width: 100%;
 	overflow: hidden;
 }
-#debug { 
+#top{ 
 	width: 100%;
 	display: block;
 	position: fixed;
 	top: 0px;
 	right: 0px;
-}
-#debug table { background-color: #FFF; }
-#requirements li{
-	float: right;
-	margin-right: 10px;
 }
 #main {
 	display: -webkit-flex;

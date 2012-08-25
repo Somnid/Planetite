@@ -26,10 +26,7 @@ var engine = (function(){
 	function step(time){
 		//fps timer
 		var interval = time - lastTime;
-		document.getElementById("fps").innerHTML = (Math.floor(1000 / interval)).toFixed(0);
-		//document.getElementById("player-position").innerHTML = (Player.position.x + "x " + Player.position.y + "y");
-		//document.getElementById("camera-position").innerHTML = (Camera.position.x + "x " + Camera.position.y + "y");
-		//document.getElementById("frameset").innerHTML = (Player.animation.frameset());
+		var fps = (Math.floor(1000 / interval)).toFixed(0);
 		
 		//get input		
 		if(!isPaused){
@@ -63,8 +60,7 @@ var engine = (function(){
 			Menu.draw();
 		}
 		//debug
-		var debugDisplay = isDebug ? "block" : "none";
-		document.querySelector("#debug .info").style.display = debugDisplay;
+		debuggerUtil.update({ fps : fps });
 		
 		renderer.present();
 		lastTime = time;
@@ -119,10 +115,10 @@ var engine = (function(){
 	}
 	
 	function init(map){
-		if(!Compatibility.requirementCheck()){
-			alert("This browser does not meet the minimum requirements");
-			return false;
-		}
+		// if(!Compatibility.requirementCheck()){
+			// alert("This browser does not meet the minimum requirements");
+			// return false;
+		// }
 		
 		renderer.initBuffer();
 		
@@ -160,7 +156,8 @@ var engine = (function(){
 			Keyboard.pressedKeys.esc = false;
 		}
 		if(Keyboard.pressedKeys.tilde){
-			toggleDebug();
+			//toggleDebug();
+			debuggerUtil.show();
 			Keyboard.pressedKeys.tilde = false;
 		}
 		if((Keyboard.pressedKeys.ctrl && Keyboard.pressedKeys.right) || (Keyboard.pressedKeys.ctrl && Keyboard.pressedKeys.left)){

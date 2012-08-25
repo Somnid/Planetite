@@ -67,3 +67,10 @@ v 0.07
 v 0.07a
 -Reverted most changes to v 0.07
 -Started refactor work (break out rendering logic from engine), cleaning up.
+
+v 0.08
+-Draw clipping (huge performance boost)
+-Offscreen buffering (huge performance boost)
+-Engine refactoring
+-Full window mode
+-new debug interface

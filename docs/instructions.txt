@@ -3,7 +3,8 @@
 -use down to duck
 -use ctrl to dig beneath you
 -use ctrl + left/right to dig to the left/right
--use Escape to pause access menu
+-use Escape to pause access menu (broken)
 -use Shift to attack
+-use ~ to open the debug window
 
 You will need to reset upon death
