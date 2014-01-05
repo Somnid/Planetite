@@ -1,3 +1,5 @@
+"use strict";
+
 var Menu = (function(){
 	
 	var height = 320;

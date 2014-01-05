@@ -1,3 +1,5 @@
+"use strict";
+
 var Animator = (function(){
 
 	var animation = function(frameMap, defaultFrameset){

@@ -1,3 +1,4 @@
+"use strict";
 //DEPENDENCIES
 
 var renderer = (function(){

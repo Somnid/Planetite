@@ -1,3 +1,5 @@
+"use strict";
+
 var Keyboard = (function(){
 	
 	var keyMapper = { //unfinished
@@ -12,21 +14,39 @@ var Keyboard = (function(){
 		39 : "right",
 		40 : "down",
 		49 : "one",
+		50 : "two",
+		51 : "three",
+		52 : "four",
+		53 : "five",
+		65 : "six",
+		67 : "seven",
+		68 : "eight",
+		69 : "nine",
 		192 : "tilde"
 	};
 	
 	var pressedKeys = {};
+	var unhandledKeys = {};
+	var handlers = {};
 	
 	document.addEventListener("keydown", function(e){
-		pressedKeys[keyMapper[e.which]] = true;
+		var key = keyMapper[e.which];
+		pressedKeys[key] = true;
+		if(handlers[key]){
+			handlers[key]();
+		}else{
+			unhandledKeys[key] = true;
+		}
 	}, true);
 	
 	document.addEventListener("keyup", function(e){
-		pressedKeys[keyMapper[e.which]] = false;
+		var key = keyMapper[e.which];
+		pressedKeys[key] = false;
+		unhandledKeys[key] = false;
 	}, true);
 	
 	function isAnyPressed(){
-		for(key in pressedKeys){
+		for(var key in pressedKeys){
 			if(pressedKeys[key]){
 				return true;
 			}
@@ -34,8 +54,14 @@ var Keyboard = (function(){
 		return false;
 	}
 	
+	function register(key, handler){
+		handlers[key] = handler;
+	}
+	
 	return {
 		pressedKeys: pressedKeys,
-		isAnyKeyPressed: isAnyPressed
+		unhandledKeys : unhandledKeys,
+		isAnyKeyPressed: isAnyPressed,
+		register : register
 	};
 })();

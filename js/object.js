@@ -1,3 +1,5 @@
+"use strict";
+
 var Object = function(animation, hp, speed, aiFunc){
 	this.position = { x:0, y: 0};
 	this.sprite = null;

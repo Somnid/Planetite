@@ -1,3 +1,4 @@
+"use strict";
 //DEPENDENCIES: renderer
 
 var engine = (function(){
@@ -114,12 +115,7 @@ var engine = (function(){
 		}
 	}
 	
-	function init(map){
-		// if(!Compatibility.requirementCheck()){
-			// alert("This browser does not meet the minimum requirements");
-			// return false;
-		// }
-		
+	function init(map){		
 		renderer.initBuffer();
 		
 		//REFACTOR into own resource loaded
@@ -139,18 +135,21 @@ var engine = (function(){
 		Compatibility.requestAnimationFrame(step, Screen.canvas);
 		
 		//DEBUG
-		document.addEventListener("keydown", function(e){
-			document.getElementById("lastkey").innerHTML = e.keyCode;
-		}, true);
-		document.getElementById("btnSave").addEventListener("click", function(){
-			console.log(engine.map.save());
-		}, true);
-		document.getElementById("btnLoad").addEventListener("click", function(){
-		}, true);
+		//document.addEventListener("keydown", function(e){
+		//	document.getElementById("lastkey").innerHTML = e.keyCode;
+		//}, true);
+		//document.getElementById("btnSave").addEventListener("click", function(){
+		//	console.log(engine.map.save());
+		//}, true);
+		//document.getElementById("btnLoad").addEventListener("click", function(){
+		//}, true);
 		//END DEBUG
 	}
 	
 	function getInput(time){
+		var emptyPad = { buttons : [] };
+		var Gamepad = navigator.webkitGetGamepads ? navigator.webkitGetGamepads()[0] ||  emptyPad : emptyPad 
+	
 		if(Keyboard.pressedKeys.esc){
 			togglePause();
 			Keyboard.pressedKeys.esc = false;
@@ -188,14 +187,14 @@ var engine = (function(){
 			Player.velocity.y -= 20;
 			Keyboard.pressedKeys.space = false;
 		}
-		if(Keyboard.pressedKeys.left && !Player.animation.getCurrentFrameset().noOverride){
+		if((Keyboard.pressedKeys.left || Gamepad.buttons[14])&& !Player.animation.getCurrentFrameset().noOverride){
 			if(Player.velocity.x > -Player.speed){
 				Player.velocity.x -= 2;
 			}
 			Player.animation.frameset("walk");
 			Player.isFacingRight = false;
 		}
-		if(Keyboard.pressedKeys.right && !Player.animation.getCurrentFrameset().noOverride){
+		if((Keyboard.pressedKeys.right || Gamepad.buttons[14]) && !Player.animation.getCurrentFrameset().noOverride){
 			if(Player.velocity.x < Player.speed){
 				Player.velocity.x += 2;
 			}

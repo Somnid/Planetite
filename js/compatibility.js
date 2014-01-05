@@ -1,3 +1,5 @@
+"use strict";
+
 var Compatibility = (function(){
 	
 	var requestAnimationFrameFunc = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.msRequestAnimationFrame;

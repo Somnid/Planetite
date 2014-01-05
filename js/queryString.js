@@ -1,3 +1,5 @@
+"use strict";
+
 var queryString = (function(){
 	
 	var cachedKeyVals;
@@ -80,3 +82,4 @@ var queryString = (function(){
 })();
 
 //TODO: Check for cache on getKeyVals
+//TODO: Hash values may not be in query-val form, need to return RAW strings

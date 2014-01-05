@@ -1,3 +1,5 @@
+"use strict";
+
 var Helper = function(){
 	
 	function random(max){

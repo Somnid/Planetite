@@ -1,3 +1,5 @@
+"use strict";
+
 var World = (function(){
 	var WORLD_VERSION = 0.06;
 	

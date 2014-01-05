@@ -1,3 +1,5 @@
+"use strict";
+
 var debuggerUtil = (function(){
 	
 	var debugWindow = null;

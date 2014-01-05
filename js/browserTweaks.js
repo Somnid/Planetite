@@ -1,3 +1,5 @@
+"use strict";
+
 window.addEventListener(
 	'keydown',
 	function(e){

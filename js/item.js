@@ -1,3 +1,5 @@
+"use strict";
+
 var ItemType = {
 	shovel : 1,
 	pickaxe : 2,

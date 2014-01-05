@@ -1,3 +1,5 @@
+"use strict";
+
 var GAME_VERSION = "0.07a";
 
 //SCREEN VARS
@@ -156,7 +158,7 @@ document.addEventListener("DOMContentLoaded",function(){
 	var canvas = document.getElementById("cvsScreen");
 	var map = World.newMap(500,500,16);
 	engine.init(map);
-	document.getElementById("version").innerHTML = GAME_VERSION;
+	//document.getElementById("version").innerHTML = GAME_VERSION;
 });
 
 window.onresize = function(){
