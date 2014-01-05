@@ -1,13 +1,7 @@
 "use strict";
 //DEPENDENCIES: renderer
 
-var engine = (function(){
-	var lastTime = 0;
-	var lastAnimationTick = 0;
-	var isPaused = false;
-	var isMenu = false;
-	var isDebug = false;
-	
+var Engine = (function(){
 	function togglePause(toggle){
 		if(toggle != undefined){
 			isPaused = toggle;
@@ -26,24 +20,21 @@ var engine = (function(){
 
 	function step(time){
 		//fps timer
-		var interval = time - lastTime;
+		var interval = time - this.lastTime;
 		var fps = (Math.floor(1000 / interval)).toFixed(0);
 		
-		//get input		
-		if(!isPaused){
+		//get input
+		if(!this.isPaused){
 			if(Player.hp > 0){
-				getInput(time);
+				this.getInput(time);
 			}
-			logicUpdates(time);
+			this.logicUpdates(time);
 		}else{
-			getMenuInput();
+			this.getMenuInput();
 		}
 		
-		//clear
 		renderer.clearScreen();
-		
-		//draw landscape
-		engine.map.draw();
+		this.map.draw();
 		
 		//draw enemies
 		for(var i = 0; i < Enemy.length; i++){
@@ -57,27 +48,27 @@ var engine = (function(){
 		renderer.drawHud();
 		
 		//draw Menu
-		if(isMenu){
+		if(this.isMenu){
 			Menu.draw();
 		}
 		//debug
 		debuggerUtil.update({ fps : fps });
 		
 		renderer.present();
-		lastTime = time;
+		this.lastTime = time;
 		
-		if(isPaused) return;
-		Compatibility.requestAnimationFrame(step, Screen.canvas);
+		if(this.isPaused) return;
+		Compatibility.requestAnimationFrame(this.step, Screen.canvas);
 	}
 	
-	function logicUpdates(time){				
+	function logicUpdates(time){
 		//velocity -> position updates
-		Player.updatePosition(time, engine.map);
+		Player.updatePosition(time, this.map);
 		
 		for(var i = 0; i < Enemy.length; i++){
 			var enemy = Enemy[i];
-			enemy.updateAI(Player, engine.map);
-			enemy.updatePosition(time, engine.map);
+			enemy.updateAI(Player, this.map);
+			enemy.updatePosition(time, this.map);
 			if(enemy.alive && enemy.checkCollision(Player)){
 				Player.attacked(1, enemy.isFacingRight);
 			};
@@ -90,10 +81,10 @@ var engine = (function(){
 			Enemy[i].updateAnimation(time);
 		}
 		
-		if(Player.position.x - Screen.center.x >= 0 && Player.position.x + Screen.center.x < engine.map.width){
+		if(Player.position.x - Screen.center.x >= 0 && Player.position.x + Screen.center.x < this.map.width){
 			Camera.position.x = Player.position.x;
 		}
-		if(Player.position.y - Screen.center.y >= 0 && Player.position.y + Screen.center.y < engine.map.height){
+		if(Player.position.y - Screen.center.y >= 0 && Player.position.y + Screen.center.y < this.map.height){
 			Camera.position.y = Player.position.y;
 		}
 	}
@@ -115,24 +106,38 @@ var engine = (function(){
 		}
 	}
 	
-	function init(map){		
+	function create(options){
 		renderer.initBuffer();
 		
+		var engine = {};
+		engine.lastTime = 0;
+		engine.lastAnimationTick = 0;
+		engine.isPaused = false;
+		engine.isMenu = false;
+		engine.isDebug = false;
+		
+		engine.loadPlayer = loadPlayer.bind(engine);
+		engine.loadCamera = loadCamera.bind(engine);
+		engine.loadEnemies = loadEnemies.bind(engine);
+		engine.getInput = getInput.bind(engine);
+		engine.logicUpdates = logicUpdates.bind(engine);
+		engine.step = step.bind(engine);
+		
 		//REFACTOR into own resource loaded
-		map.loadTile("black", "black.png");
-		map.loadTile("dirt", "dirt.png");
-		map.loadTile("green", "green.png");
-		map.loadTile("red", "red.png");
-		map.loadTile("rock", "rock.png");
-		map.loadTile("ore", "ore.png");
-		loadPlayer(map);
-		loadCamera(map);
-		loadEnemies(map);
-		engine.map = map;
+		engine.map = options.map;
+		engine.map.loadTile("black", "black.png");
+		engine.map.loadTile("dirt", "dirt.png");
+		engine.map.loadTile("green", "green.png");
+		engine.map.loadTile("red", "red.png");
+		engine.map.loadTile("rock", "rock.png");
+		engine.map.loadTile("ore", "ore.png");
+		engine.loadPlayer();
+		engine.loadCamera();
+		engine.loadEnemies();
 		//End REFACTOR
 		
-		lastTime = window.webkitAnimationStartTime;
-		Compatibility.requestAnimationFrame(step, Screen.canvas);
+		engine.lastTime = window.webkitAnimationStartTime;
+		Compatibility.requestAnimationFrame(engine.step, Screen.canvas);
 		
 		//DEBUG
 		//document.addEventListener("keydown", function(e){
@@ -172,7 +177,7 @@ var engine = (function(){
 			Player.animation.lastTick = time;
 		}
 		if(Keyboard.pressedKeys.ctrl){
-			engine.map.getTileAt(Player.position.x + (Player.width / 2), Player.getBottom()+ engine.map.gridSize - 1, 0).attack(Player.inventory.shovel.power);
+			this.map.getTileAt(Player.position.x + (Player.width / 2), Player.getBottom()+ this.map.gridSize - 1, 0).attack(Player.inventory.shovel.power);
 			Keyboard.pressedKeys.ctrl = false;
 			Player.animation.frameset("dig");
 			Player.animation.lastTick = time;
@@ -183,7 +188,7 @@ var engine = (function(){
 			Player.animation.frameset("sword");
 			Player.animation.lastTick = time;
 		}
-		if(Keyboard.pressedKeys.space && Player.isGrounded(engine.map)){
+		if(Keyboard.pressedKeys.space && Player.isGrounded(this.map)){
 			Player.velocity.y -= 20;
 			Keyboard.pressedKeys.space = false;
 		}
@@ -213,8 +218,8 @@ var engine = (function(){
 	
 	function getMenuInput(){
 		if(Keyboard.pressedKeys.esc){
-			togglePause();
-			toggleMenu();
+			this.togglePause();
+			this.toggleMenu();
 			Keyboard.pressedKeys.esc = false;
 		}
 		if(Keyboard.pressedKeys.down){
@@ -227,8 +232,44 @@ var engine = (function(){
 		}
 	}
 	
+	function loadPlayer(){
+		var sprite = new Image();
+		sprite.src = "sprites/player.png"
+		Player.sprite = sprite;
+		
+		Player.position.x = this.map.width / 2;
+		Player.position.y = this.map.height / 4;
+		Player.width = 16;
+		Player.height = 32;
+	}
+
+	function loadEnemies(){
+		var sprite = new Image();
+		sprite.src = "sprites/spider.png"
+		Enemy[0].sprite = sprite;
+	
+		Enemy[0].position.x = this.map.width * 0.75;
+		Enemy[0].position.y = this.map.height * 0.25;
+		Enemy[0].width = 23;
+		Enemy[0].height = 10;
+	
+		var sprite2 = new Image();
+		sprite2.src = "sprites/spiney.png"
+		Enemy[1].sprite = sprite2;
+	
+		Enemy[1].position.x = this.map.width * 0.25;
+		Enemy[1].position.y = this.map.height * 0.25;
+		Enemy[1].width = 19;
+		Enemy[1].height = 10;
+	}
+
+	function loadCamera(){
+		Camera.position.x = this.map.width / 2;
+		Camera.position.y = this.map.height / 2;
+	}
+	
 	return {
-		init: init
+		create : create
 	};
 	
 })();

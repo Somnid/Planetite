@@ -1,6 +1,6 @@
 "use strict";
 
-var GAME_VERSION = "0.07a";
+var GAME_VERSION = "0.08";
 
 //SCREEN VARS
 var Screen = {
@@ -71,7 +71,7 @@ var Player = new PlayerObject(new Animator.animation({
 }),3,3);
 
 //ENEMY VARS
-var spider = new Object(new Animator.animation({
+var spider = new Actor(new Animator.animation({
 				"idle" : {
 					frames: [new Animator.frame({frameHeight: 10, frameWidth: 23, duration: 142}),
 					new Animator.frame({frameHeight: 10, frameWidth: 15, duration: 142, offsetX: 4, offsetY: 0})],
@@ -87,7 +87,7 @@ var spider = new Object(new Animator.animation({
 				}
 			}),3, 1, AI.crawl);
 
-var spiney = new Object(new Animator.animation({
+var spiney = new Actor(new Animator.animation({
 				"idle" : {
 					frames: [new Animator.frame({frameHeight: 10, frameWidth: 19, duration: 142}),
 					new Animator.frame({frameHeight: 10, frameWidth: 19, duration: 142})],
@@ -118,47 +118,12 @@ var hudAsset = (function(){
 	};
 })();
 
-function loadPlayer(map){
-	var sprite = new Image();
-	sprite.src = "sprites/player.png"
-	Player.sprite = sprite;
-	
-	Player.position.x = map.width / 2;
-	Player.position.y = map.height / 4;
-	Player.width = 16;
-	Player.height = 32;
-}
-
-function loadEnemies(map){
-	var sprite = new Image();
-	sprite.src = "sprites/spider.png"
-	Enemy[0].sprite = sprite;
-	
-	Enemy[0].position.x = map.width * 0.75;
-	Enemy[0].position.y = map.height * 0.25;
-	Enemy[0].width = 23;
-	Enemy[0].height = 10;
-	
-	var sprite2 = new Image();
-	sprite2.src = "sprites/spiney.png"
-	Enemy[1].sprite = sprite2;
-	
-	Enemy[1].position.x = map.width * 0.25;
-	Enemy[1].position.y = map.height * 0.25;
-	Enemy[1].width = 19;
-	Enemy[1].height = 10;
-}
-
-function loadCamera(map){
-	Camera.position.x = map.width / 2;
-	Camera.position.y = map.height / 2;
-}
-
 document.addEventListener("DOMContentLoaded",function(){
 	var canvas = document.getElementById("cvsScreen");
 	var map = World.newMap(500,500,16);
-	engine.init(map);
-	//document.getElementById("version").innerHTML = GAME_VERSION;
+	var engine = Engine.create({
+		map : map
+	});
 });
 
 window.onresize = function(){

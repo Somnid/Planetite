@@ -1,6 +1,6 @@
 "use strict";
 
-var Object = function(animation, hp, speed, aiFunc){
+var Actor = function(animation, hp, speed, aiFunc){
 	this.position = { x:0, y: 0};
 	this.sprite = null;
 	this.animation = animation;
@@ -14,20 +14,20 @@ var Object = function(animation, hp, speed, aiFunc){
 	return this;
 };
 
-Object.prototype.getRight = function(){
+Actor.prototype.getRight = function(){
 	return this.position.x + this.width;
 };
 
-Object.prototype.getBottom = function(){
+Actor.prototype.getBottom = function(){
 	return this.position.y + this.height;
 };
 
-Object.prototype.isGrounded = function(map){
+Actor.prototype.isGrounded = function(map){
 	var yToTest = this.getBottom() + 1;
 	return map.getTileAt(this.position.x+1, yToTest).isSolid || map.getTileAt(this.getRight()-1, yToTest).isSolid;
 };
 
-Object.prototype.checkCollision = function(object){	
+Actor.prototype.checkCollision = function(object){	
 	if(((object.position.x >= this.position.x && object.position.x <= this.getRight())
 			|| (object.getRight() >= this.position.x && object.getRight() <= this.getRight()))
 		&& ((object.position.y >= this.position.y && object.position.y <= this.getBottom())
@@ -39,7 +39,7 @@ Object.prototype.checkCollision = function(object){
 	return false;
 };
 
-Object.prototype.attacked = function(damage, isRightSide){
+Actor.prototype.attacked = function(damage, isRightSide){
 	var flip = isRightSide ? 1: -1;
 	this.hp -= damage;
 	this.velocity.x += 10 * flip;
@@ -52,7 +52,7 @@ Object.prototype.attacked = function(damage, isRightSide){
 	}
 };
 
-Object.prototype.draw = function(){
+Actor.prototype.draw = function(){
 	var renderPosition = Screen.absPositionToRenderPosition(this.position);
 	var flip = this.isFacingRight ? 1 : -1;
 	var flipTranslate = this.isFacingRight ? 0 : this.width;
@@ -86,7 +86,7 @@ Object.prototype.draw = function(){
 	renderer.drawSprite(this.sprite, renderPosition, flip, flipTranslate, currentFrame, frameOffset, framesetOffset);
 };
 
-Object.prototype.updatePosition = function(time, map){
+Actor.prototype.updatePosition = function(time, map){
 	var i = 0;
 	
 	//Gravity
@@ -202,7 +202,7 @@ Object.prototype.updatePosition = function(time, map){
 	}
 };
 
-Object.prototype.updateAnimation = function(time){
+Actor.prototype.updateAnimation = function(time){
 	var frameDuration = this.animation.getCurrentFrame().duration;
 	if(this.animation.lastTick + frameDuration < time){  //7fps
 		var frameMap = this.animation.frameMap[this.animation.frameset()];
@@ -216,7 +216,7 @@ Object.prototype.updateAnimation = function(time){
 	}
 };
 
-Object.prototype.updateAI = function(target, map){
+Actor.prototype.updateAI = function(target, map){
 	this.aiFunc.call(this, target, map);
 };
 
@@ -229,10 +229,10 @@ var PlayerObject = function(){
 		sword : new Sword("Bronze Alloy Sword", 1),
 		armor : new Armor("Ratty Spacesuit", 0)
 	};
-	return Object.apply(this, arguments);
+	return Actor.apply(this, arguments);
 };
 
-PlayerObject.prototype = new Object();
+PlayerObject.prototype = new Actor();
 
 PlayerObject.prototype.attacked = function(damage, isRightSide){
 	if(this.hp > 0){
