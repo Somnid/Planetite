@@ -22,7 +22,7 @@ var Keyboard = (function(){
 		67 : "seven",
 		68 : "eight",
 		69 : "nine",
-		192 : "tilde"
+		223 : "tilde" //192
 	};
 	
 	var pressedKeys = {};

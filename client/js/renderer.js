@@ -1,10 +1,10 @@
 "use strict";
 //DEPENDENCIES
 
-var renderer = (function(){
+var Renderer = (function(){
 
 	function initBuffer(){
-		Screen.canvas = document.getElementById("cvsScreen");
+		Screen.canvas = this.canvas;
 		Screen.webkitImageSmoothingEnabled = false;
 		Screen.canvas.width = parseInt(document.defaultView.getComputedStyle(Screen.canvas).getPropertyValue("width").replace("px", ""));
 		Screen.canvas.height = parseInt(document.defaultView.getComputedStyle(Screen.canvas).getPropertyValue("height").replace("px", ""));
@@ -58,14 +58,23 @@ var renderer = (function(){
 	function present(){
 		Screen.context.drawImage(Screen.buffer, 0, 0);
 	}
-
+	
+	function create(options){
+		var renderer = {};
+		renderer.canvas = options.canvas;
+		
+		renderer.initBuffer = initBuffer.bind(renderer);
+		renderer.clearScreen = clearScreen.bind(renderer);
+		renderer.drawHud = drawHud.bind(renderer);
+		renderer.drawTile = drawTile.bind(renderer);
+		renderer.drawSprite = drawSprite.bind(renderer);
+		renderer.present = present.bind(renderer);
+		
+		return renderer;
+	}
+	
 	return {
-		initBuffer : initBuffer,
-		clearScreen: clearScreen,
-		drawHud : drawHud,
-		drawTile : drawTile,
-		drawSprite : drawSprite,
-		present : present
+		create : create
 	};
 
 })();

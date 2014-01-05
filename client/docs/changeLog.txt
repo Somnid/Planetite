@@ -58,7 +58,7 @@ v 0.06
 v 0.07
 -Google App Manifest
 -Settings menu
--Custom soudtrack (Doesn't work in Firefox for some reason)
+-Custom soundtrack (Doesn't work in Firefox for some reason)
 -HTML5 Audio/WebAudio SFX
 -Ads
 -Increased map depth (test)
@@ -74,3 +74,6 @@ v 0.08
 -Engine refactoring
 -Full window mode
 -new debug interface
+
+v 0.09
+-Refactoring to use more dependancy injection as well as better encapsulation and less globals.

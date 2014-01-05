@@ -44,7 +44,7 @@ var debuggerUtil = (function(){
 		
 		var output = document.getElementById("content");
 		output.innerHTML = "";
-		for(key in e.data){
+		for(var key in e.data){
 			var element = document.createElement("p");
 			var text = document.createTextNode(key + ": " + e.data[key]);
 			element.appendChild(text);

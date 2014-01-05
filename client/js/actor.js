@@ -52,7 +52,7 @@ Actor.prototype.attacked = function(damage, isRightSide){
 	}
 };
 
-Actor.prototype.draw = function(){
+Actor.prototype.draw = function(renderer){
 	var renderPosition = Screen.absPositionToRenderPosition(this.position);
 	var flip = this.isFacingRight ? 1 : -1;
 	var flipTranslate = this.isFacingRight ? 0 : this.width;

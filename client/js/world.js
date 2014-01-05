@@ -64,7 +64,7 @@ var World = (function(){
 			this.tiles[name] = tile;
 		};
 		
-		this.draw = function(){
+		this.draw = function(renderer){
 			var clipBounds = this.getTileClipBounds();
 			
 			for(var i = clipBounds.xStart; i < clipBounds.xEnd; i++){

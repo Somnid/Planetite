@@ -120,12 +120,16 @@ var hudAsset = (function(){
 
 document.addEventListener("DOMContentLoaded",function(){
 	var canvas = document.getElementById("cvsScreen");
+	var renderer = Renderer.create({
+		canvas : document.getElementById("cvsScreen")
+	});
 	var map = World.newMap(500,500,16);
 	var engine = Engine.create({
-		map : map
+		map : map,
+		renderer : renderer
 	});
 });
 
 window.onresize = function(){
-	renderer.initBuffer();
+	Renderer.initBuffer();
 };

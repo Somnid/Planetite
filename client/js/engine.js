@@ -1,20 +1,19 @@
 "use strict";
-//DEPENDENCIES: renderer
 
 var Engine = (function(){
 	function togglePause(toggle){
 		if(toggle != undefined){
-			isPaused = toggle;
+			this.isPaused = toggle;
 		}else{
-			isPaused = !isPaused;
+			this.isPaused = !this.isPaused;
 		}
 	}
 	
 	function toggleDebug(toggle){
 		if(toggle != undefined){
-			isDebug = toggle;
+			this.isDebug = toggle;
 		}else{
-			isDebug = !isDebug;
+			this.isDebug = !this.isDebug;
 		}
 	}
 
@@ -33,28 +32,32 @@ var Engine = (function(){
 			this.getMenuInput();
 		}
 		
-		renderer.clearScreen();
-		this.map.draw();
+		this.renderer.clearScreen();
+		this.map.draw(this.renderer);
 		
 		//draw enemies
 		for(var i = 0; i < Enemy.length; i++){
-			Enemy[i].draw(time);
+			Enemy[i].draw(this.renderer, time);
 		}
 		
 		//draw sprite
-		Player.draw(time);
+		Player.draw(this.renderer, time);
 		
 		//draw Hud
-		renderer.drawHud();
+		this.renderer.drawHud();
 		
 		//draw Menu
 		if(this.isMenu){
 			Menu.draw();
 		}
 		//debug
-		debuggerUtil.update({ fps : fps });
+		debuggerUtil.update({ 
+			fps : fps,
+			screenHeight : Screen.buffer.height,
+			screenWidth : Screen.buffer.width
+		});
 		
-		renderer.present();
+		this.renderer.present();
 		this.lastTime = time;
 		
 		if(this.isPaused) return;
@@ -107,14 +110,13 @@ var Engine = (function(){
 	}
 	
 	function create(options){
-		renderer.initBuffer();
-		
 		var engine = {};
 		engine.lastTime = 0;
 		engine.lastAnimationTick = 0;
 		engine.isPaused = false;
 		engine.isMenu = false;
 		engine.isDebug = false;
+		engine.renderer = options.renderer;
 		
 		engine.loadPlayer = loadPlayer.bind(engine);
 		engine.loadCamera = loadCamera.bind(engine);
@@ -122,7 +124,10 @@ var Engine = (function(){
 		engine.getInput = getInput.bind(engine);
 		engine.logicUpdates = logicUpdates.bind(engine);
 		engine.step = step.bind(engine);
+		engine.togglePause = togglePause.bind(engine);
+		engine.toggleDebug = toggleDebug.bind(engine);
 		
+		engine.renderer.initBuffer();
 		//REFACTOR into own resource loaded
 		engine.map = options.map;
 		engine.map.loadTile("black", "black.png");
@@ -138,17 +143,6 @@ var Engine = (function(){
 		
 		engine.lastTime = window.webkitAnimationStartTime;
 		Compatibility.requestAnimationFrame(engine.step, Screen.canvas);
-		
-		//DEBUG
-		//document.addEventListener("keydown", function(e){
-		//	document.getElementById("lastkey").innerHTML = e.keyCode;
-		//}, true);
-		//document.getElementById("btnSave").addEventListener("click", function(){
-		//	console.log(engine.map.save());
-		//}, true);
-		//document.getElementById("btnLoad").addEventListener("click", function(){
-		//}, true);
-		//END DEBUG
 	}
 	
 	function getInput(time){
@@ -156,7 +150,7 @@ var Engine = (function(){
 		var Gamepad = navigator.webkitGetGamepads ? navigator.webkitGetGamepads()[0] ||  emptyPad : emptyPad 
 	
 		if(Keyboard.pressedKeys.esc){
-			togglePause();
+			this.togglePause();
 			Keyboard.pressedKeys.esc = false;
 		}
 		if(Keyboard.pressedKeys.tilde){
